@@ -6,13 +6,10 @@ import torchvision
 import torchvision.datasets as dataset
 import torchvision.transforms as transforms
 import matplotlib.pyplot as plt
-from google.colab import files
 import time
 import struct
 import PIL
 import torchvision.models as models
-
-
 
 class trainer:
     def __init__(self, netparam, dataloaders, optimizer, loss_metric, epochs, gpu_boole, verbose, train_bool, val_bool, test_bool):
