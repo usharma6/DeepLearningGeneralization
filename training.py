@@ -19,30 +19,16 @@ def get_model(model_name, mode, experiment):
     if model_name == "vgg":
       model = models.vgg19_bn(pretrained=True)
       model.classifier[-1] = nn.Linear(in_features=4096, out_features=200)
-      for param in model.parameters():
-        param.requires_grad = False
-      for param in model.classifier[-1].parameters():
-        param.requires_grad = True
     elif model_name == "googlenet":
       model = models.googlenet(pretrained=True)
       model.fc.out_features = 200
-      for param in model.parameters():
-        param.requires_grad = False
-      for param in model.fc.parameters():
-        param.requires_grad = True
     elif model_name == "resnet":
       model = models.resnet18(pretrained=True)
       model.avgpool = nn.AdaptiveAvgPool2d(1)
       model.fc.out_features = 200
-      for param in model.parameters():
-        param.requires_grad = False
-      for param in model.fc.parameters():
-        param.requires_grad = True
     return model
   else:
     model = torch.load("models/" + model_name + "/" + experiment + ".model")
-    for param in model.parameters(): 
-      param.requires_grad = True
     return model
 
 def train_experiment(model, model_name, experiment, gpu_boole):
