@@ -1,0 +1,13 @@
+pip:
+$ sudo apt update
+$ sudo apt install python3-pip
+
+packages:
+$ pip install --upgrade pip
+$ pip install opencv-python
+$ pip install torch
+$ pip install torchvision
+
+cuda:
+$ wget https://developer.download.nvidia.com/compute/cuda/11.1.1/local_installers/cuda_11.1.1_455.32.00_linux.run
+$ sudo sh cuda_11.1.1_455.32.00_linux.run
