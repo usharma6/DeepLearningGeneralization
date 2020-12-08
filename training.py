@@ -66,12 +66,13 @@ def train_experiment(model, model_name, experiment, gpu_boole):
   pickle.dump(results_pickle, open('results/' + model_name + '/' + experiment +  '.pkl', 'wb'))
   torch.save(model.state_dict(), 'models/' + model_name + '/' + experiment + '.model')
 
-def training(model_name, experiment_list, mode):
+def training(model_name, experiment_list, mode, gpu_boole):
   for experiment in experiment_list:
     model = get_model(model_name, mode)
     train_experiment(model, model_name, experiment, gpu_boole)
 
 if __name__ == "__main__":
+  gpu_boole = torch.cuda.is_available()
   model_list = ["vgg", "googlenet", "resnet"]
   baseline_experiment_list = ["Baseline_Blur", "Baseline_Rotation", "Baseline_Jitter", "Baseline_Grayscale", "Baseline_Erasing"]
   augmented_experiment_list = ["Blur", "Rotation", "Jitter", "Grayscale", "Erasing"]
@@ -79,4 +80,4 @@ if __name__ == "__main__":
   mode_list = ["baseline", "augmented"]
   for model in model_list:
       for i in range(len(mode_list)):
-          training(model, experiment_list[i], mode_list[i])
+          training(model, experiment_list[i], mode_list[i], gpu_boole)
