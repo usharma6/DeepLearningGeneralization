@@ -10,4 +10,4 @@
     models/resnet/
     models/googlenet/
 4. adjust hyper parameters in training.py
-5. run nohup & python3 training.py
+5. run nohup python3 training.py &
