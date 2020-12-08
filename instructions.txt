@@ -9,5 +9,8 @@
     models/vgg/
     models/resnet/
     models/googlenet/
+    train_data/vgg/
+    train_data/resnet/
+    train_data/googlenet/
 4. adjust hyper parameters in training.py
 5. run nohup python3 training.py &

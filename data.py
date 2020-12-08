@@ -33,8 +33,17 @@ def AugmentedImageNet(train_transforms=[], val_transforms=[], test_transforms=[]
     return dataloaders
 
 DATA_DICT = {
-    "Baseline_Blur" : AugmentedImageNet(train_transforms=[   
+    "baseline" : AugmentedImageNet(train_transforms=[   
       transforms.ToTensor(),
+      ], 
+    val_transforms=[
+      transforms.ToTensor(),
+    ],
+    test_transforms=[]),
+
+    "Evaluation_Blur" : AugmentedImageNet(train_transforms=[   
+      transforms.ToTensor(),
+      transforms.GaussianBlur(3, sigma=1.0)
       ], 
     val_transforms=[
       transforms.ToTensor(),
@@ -42,8 +51,9 @@ DATA_DICT = {
     ],
     test_transforms=[]),
 
-    "Baseline_Rotation" : AugmentedImageNet(train_transforms=[   
+    "Evaluation_Rotation" : AugmentedImageNet(train_transforms=[   
       transforms.ToTensor(),
+      transforms.RandomRotation(10),
       ],  
     val_transforms=[
       transforms.ToTensor(),
@@ -51,7 +61,8 @@ DATA_DICT = {
     ],
     test_transforms=[]),
 
-    "Baseline_Jitter" : AugmentedImageNet(train_transforms=[   
+    "Evaluation_Jitter" : AugmentedImageNet(train_transforms=[   
+      transforms.ColorJitter(),   
       transforms.ToTensor(),
       ],  
     val_transforms=[
@@ -60,8 +71,9 @@ DATA_DICT = {
     ],
     test_transforms=[]), 
 
-    "Baseline_Grayscale" : AugmentedImageNet(train_transforms=[   
+    "Evaluation_Grayscale" : AugmentedImageNet(train_transforms=[   
       transforms.ToTensor(),
+      transforms.RandomGrayscale(1),
       ],  
     val_transforms=[
       transforms.ToTensor(),
@@ -69,8 +81,9 @@ DATA_DICT = {
     ],
     test_transforms=[]),
 
-    "Baseline_Erasing" : AugmentedImageNet(train_transforms=[   
+    "Evaluation_Erasing" : AugmentedImageNet(train_transforms=[   
       transforms.ToTensor(),
+      transforms.RandomErasing(p=1), 
       ], 
     val_transforms=[
       transforms.ToTensor(),
