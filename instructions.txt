@@ -1,0 +1,13 @@
+1. install tiny-image-net with the commands:
+    wget http://cs231n.stanford.edu/tiny-imagenet-200.zip
+    unzip tiny-imagenet-200.zip
+2. run 'python3 tinyimagenet.py'
+3. make the following directories for results:
+    results/vgg/
+    results/resnet/
+    results/googlenet/
+    models/vgg/
+    models/resnet/
+    models/googlenet/
+4. adjust hyper parameters in training.py
+5. run nohup & python3 training.py
