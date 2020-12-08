@@ -76,5 +76,13 @@ def eval(model_name, experiment_list, gpu_boole):
 if __name__ == "__main__":
   gpu_boole = torch.cuda.is_available()
   model_list = ["vgg", "googlenet", "resnet"]
+  baseline_list = ["baseline"]
+  training_experiment_list = ["Blur", "Rotation", "Jitter", "Grayscale", "Erasing"]
   evaluation_experiment_list = ["Evaluation_Blur", "Evaluation_Rotation", "Evaluation_Jitter", "Evaluation_Grayscale", "Evaluation_Erasing"]
-  training_experiment_list = ["baseline", "Blur", "Rotation", "Jitter", "Grayscale", "Erasing"]
+  for model in model_list:
+    training(model, baseline_list, gpu_boole)
+  for model in model_list:
+    training(model, training_experiment_list, gpu_boole)
+  for model in model_list:
+    eval(model, evaluation_experiment_list, gpu_boole)
+  #training_experiment_list = ["baseline", "Blur", "Rotation", "Jitter", "Grayscale", "Erasing"]
