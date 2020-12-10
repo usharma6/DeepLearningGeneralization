@@ -28,7 +28,17 @@ def get_model(model_name, mode, experiment):
       model.fc.out_features = 200
     return model
   else:
-    model = torch.load("models/" + model_name + "/" + experiment + ".model")
+    if model_name == "vgg":
+      model = models.vgg19_bn(pretrained=False)
+      model.classifier[-1] = nn.Linear(in_features=4096, out_features=200)
+    elif model_name == "googlenet":
+      model = models.googlenet(pretrained=False)
+      model.fc.out_features = 200
+    elif model_name == "resnet":
+      model = models.resnet18(pretrained=False)
+      model.avgpool = nn.AdaptiveAvgPool2d(1)
+      model.fc.out_features = 200 
+    model.load_state_dict(torch.load("models/" + model_name + "/baseline.model"))
     return model
 
 def train_experiment(model, model_name, experiment, gpu_boole):
@@ -79,10 +89,10 @@ if __name__ == "__main__":
   baseline_list = ["baseline"]
   training_experiment_list = ["Blur", "Rotation", "Jitter", "Grayscale", "Erasing"]
   evaluation_experiment_list = ["Evaluation_Blur", "Evaluation_Rotation", "Evaluation_Jitter", "Evaluation_Grayscale", "Evaluation_Erasing"]
-  for model in model_list:
-    training(model, baseline_list, gpu_boole)
+  #for model in model_list:
+    #training(model, baseline_list, gpu_boole)
   for model in model_list:
     training(model, training_experiment_list, gpu_boole)
-  for model in model_list:
-    eval(model, evaluation_experiment_list, gpu_boole)
+  #for model in model_list:
+    #eval(model, evaluation_experiment_list, gpu_boole)
   #training_experiment_list = ["baseline", "Blur", "Rotation", "Jitter", "Grayscale", "Erasing"]
